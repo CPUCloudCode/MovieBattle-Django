@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="col-5 text-white">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 id="movie1Title">{{ c1.movie_text }}</h4>
+            </div>
+            <div class="d-flex justify-content-center" style="height: 65%;">
+                <img id="movie1Img" src="{{ c1.href }}" width="100%">
+            </div>
+            <div class="d-flex justify-content-center">
+                <form id="movie1Vote" method="post" class="mt-4 w-50" action="{% url 'post' %}">
+                    {% csrf_token %}
+                    <p id="token" style="display: none;">{{ csrf_token }}</p>
+                    <p id="url" style="display: none;">{% url 'vote' %}</p>
+                    <p id="checkUrl" style="display: none;">{% url 'checkVote' %}</p>
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <button id="btnVote1" type="submit" class="btn btn-lg {% if voted %}btn-outline-success disabled{% else %}btn-outline-warning{% endif %} w-100">Vote for it</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="d-flex justify-content-center text-white">
+                <h1 class="display-1">VS</h1>
+            </div>
+            <div class="position-absolute bottom-0 start-50 translate-middle-x mb-2">
+                <div id="spinner" class="text-center text-primary" {% if not voted %}style="display: none;"{% endif %}>
+                    <div class="spinner-border display-6" role="status">
+                      <span>Waiting</span>
+                    </div>
+                  </div>
+                <div class="d-flex justify-content-center">
+                    <h1 id="rounds" class="text-white display-2">{{ game.round }}/{{ game.rounds }}</h1>
+                </div>
+                <p id="gameId" style="color: white; font-size: 12px;">{{ id }}</p>
+            </div>
+        </div>
+        <div class="col-5 text-white">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 id="movie2Title">{{ c2.movie_text }}</h4>
+            </div>
+            <div class="d-flex justify-content-center" style="height: 65%;">
+                <img id="movie2Img" src="{{ c2.href }}" width="100%">
+            </div>
+            <div class="d-flex justify-content-center">
+                <form id="movie2Vote" method="post" class="mt-4 w-50" action="{% url 'post' %}">
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <button id="btnVote2" type="submit" class="btn btn-lg {% if voted %}btn-outline-danger disabled{% else %}btn-outline-warning{% endif %} w-100">Vote for it</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="{% static 'js/gamevote.js' %}"></script>
+{% endblock %}

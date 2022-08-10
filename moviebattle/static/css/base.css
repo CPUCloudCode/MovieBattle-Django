@@ -1,0 +1,12 @@
+body {
+    background-color: rgb(23, 35, 55);
+}
+
+.nav-link {
+    font-size: 1.4rem;
+}
+
+.navbar-brand {
+    font-size: 1.8rem;
+    font-family: 'Stoke', serif;
+}

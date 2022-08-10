@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+<!-- JavaScript Bundle with Popper -->
+<link href="{% static 'css/instruction.css' %}" rel="stylesheet"></link>
+<style>
+  #container {
+      height: 100% !important;
+      margin-bottom: 4rem;
+  }
+</style>
+{% endblock %}
+{% block content %}
+<div id="myCarousel" class="carousel slide text-white" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'img/simple-mode.png' %}" alt="">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Simple Mode</h1>
+            <p>The default and easy version of Movie Contest</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/audience-vote.png' %}" alt="">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Audience Mode</h1>
+            <p>As the hoster of a game you can change the round number</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/audience-mode.png' %}" alt="">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Audience Mode</h1>
+            <p>Let your friends or watchers send in Movies for the contest</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+
+  <!-- Marketing messaging and featurettes
+  ================================================== -->
+  <!-- Wrap the rest of the page in another container to center all the content. -->
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row mb-5">
+      <div class="col-lg-4">
+        <img class="bd-placeholder-img rounded-circle" src="https://img.freepik.com/free-vector/comic-style-versus-vs-banner-yellow-turquoise-color_1017-25140.jpg?w=2000" width="140" height="140">
+
+        <h2 class="mt-3 mb-4">Simple Mode</h2>
+        <p class="mb-5">Just jump directly into the movie contest by randomly generate Movies or choose a category</p>
+        <p><a class="btn btn-outline-primary" href="/game/start">Start now &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="bd-placeholder-img rounded-circle" src="https://p7x7q5i4.rocketcdn.me/en/wp-content/uploads/sites/2/2020/06/target-audience.png" width="140" height="140">
+
+        <h2 class="mt-3 mb-4">Audience Mode</h2>
+        <p class="mb-5">In the audience mode you can share a link with your friends or watchers, so they can send in movies</p>
+        <p><a class="btn btn-outline-warning" href="#">Audience Mode &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img class="bd-placeholder-img rounded-circle" src="https://imageio.forbes.com/specials-images/dam/imageserve/1063184564/0x0.jpg?format=jpg&width=1200" width="140" height="140">
+        <h2 class="mt-3 mb-4">Audience Vote Mode</h2>
+        <p class="mb-5">The Audience Vote Mode is an extension of AM where your friend or watchers can vote for the movies</p>
+        <p><a class="btn btn-outline-danger" href="#">Start now &raquo;</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+    <!-- /END THE FEATURETTES -->
+
+  </div><!-- /.container -->
+
+{% endblock %}

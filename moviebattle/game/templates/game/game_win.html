@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8 text-white">
+            <div class="d-flex justify-content-center mb-5">
+                <h2 class="text-white">Winner: {{ winner }}</h2>
+                <h2 id="winnerTitle" class="text-white" style="display: none;">{{ winner }}</h2>
+            </div>
+            <div class="d-flex justify-content-center mt-2">
+                <img id="winnerImg" src="{% if href %}{{href}}{% endif %}" height="65%" width="100%">
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="{% static 'js/game_win.js' %}"></script>
+<style>
+    #container {
+        height: 100% !important;
+        margin-bottom: 4rem;
+    }
+</style>
+{% endblock %}

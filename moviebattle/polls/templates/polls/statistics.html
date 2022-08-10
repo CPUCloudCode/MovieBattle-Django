@@ -1,0 +1,185 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+<link href="{% static 'css/statistics.css' %}" rel="stylesheet"></link>
+{% endblock %}
+{% block content %}
+    <div id="controller">
+        <div class="row text-white">
+            <div class="col-2">
+                <label for="searchInput" class="form-label">Search</label>
+                <input type="text" class="form-control" id="searchInput" aria-describedby="emailHelp">
+            </div>
+            <div class="col-2">
+                <label for="genre" class="form-label">Genres</label>
+                <select id="genre" class="form-select" aria-label="Default select example">
+                    <option selected>Any</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="year" class="form-label">Year</label>
+                <select id="year" class="form-select" aria-label="Default select example">
+                    <option selected>Any</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="year" class="form-label">Sort by</label>
+                <select id="year" class="form-select" aria-label="Default select example">
+                    <option selected>Most wins</option>
+                    <option value="1">Most votes</option>
+                    <option value="2">less wins</option>
+                    <option value="3">less votes</option>
+                </select>
+            </div>
+            <div class="col-2">
+                <label for="year" class="form-label">Sort by</label>
+                <select id="year" class="form-select" aria-label="Default select example">
+                    <option selected>Most wins</option>
+                    <option value="1">Most votes</option>
+                    <option value="2">Less wins</option>
+                    <option value="3">Less votes</option>
+                </select>
+            </div>
+            <div class="col-2 d-flex align-baseline">
+                <button class="btn btn-lg btn-outline-warning mt-4 ml-5 w-100">Reset all</button>
+            </div>
+        </div>
+    </div>
+    <div id="cards" class="mt-5 text-white">
+        <div class="row row-cards">
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                      <h5>1</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Moana</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+                      <h5>2</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Dune</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      <h5>3</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Spider-Man</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>4</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Star Wars</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>5</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Lord of the Rings</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>6</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Skyfall</p>
+            </div>
+        </div>
+        <div class="row row-cards mt-4">
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>7</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Raya and the Last Dragon</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>8</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Encanto</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>9</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Tyler Rake: Extraction</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>10</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Gold</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>11</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">Star Trek Beyond</p>
+            </div>
+            <div class="col-2">
+                <div class="d-inline-flex position-relative">
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
+                      <h5>12</h5>
+                        <span class="visually-hidden">New alerts</span>
+                    </span>
+                    <img class="w-100" src="https://us.123rf.com/450wm/lishchyshyn/lishchyshyn1904/lishchyshyn190403199/132862735-vektor-ladesymbol-futuristisches-fortschrittsdesign.jpg?ver=6" alt="Searching" height="250">
+                </div>
+                <p class="mt-2">The Lucky One</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="{% static 'js/statistics.js' %}"></script>
+{% endblock %}

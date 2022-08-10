@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+<!-- JavaScript Bundle with Popper -->
+<link href="{% static 'css/about-us.css' %}" rel="stylesheet"></link>
+<style>
+    #container {
+        height: 100% !important;
+        margin-bottom: 4rem;
+    }
+</style>
+
+{% endblock %}
+{% block content %}
+    <div class="hero d-flex justify-content-center">
+        <h1 class="display-1">Hey there. I'm MikadoBlanket</h1>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="height: 30rem !important;">
+                <div class="card-body overflow-auto">
+                    <div class="d-flex justify-content-center">
+                        <h1 class="display-4">Support this Project</h1>
+                    </div>
+                    <p class="mt-4 mb-5">Hi! This project is paid out of our own pocket and we do not place any advertising. Therefore it would be great if you would support this project by buying me a coffee.</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="http://buymeacoffee.com/mikadoblanket" class="btn btn-lg btn-warning mt-5">Buy me a coffee</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <img src="{% static 'img/buymeacoffee.jpg' %}" style="height: 30rem !important;">
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <img src="{% static 'img/paypal.png' %}" style="height: 30rem !important; width: 100%;">
+        </div>
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="height: 30rem !important;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <h1 class="display-4">Project's History</h1>
+                    </div>
+                    <p class="mt-4 mb-5">After so many arguments with my friends about which movie is the best, I just thought to myself "Hey, why don't you just program it, because I'm sure others feel the same way".</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="https://paypal.me/mikadoblanket?country.x=DE&locale.x=de_DE" class="btn btn-lg btn-primary mt-5">Support via Paypal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col">
+            <div class="card text-white bg-dark mb-3" style="height: 30rem !important;">
+                <div class="card-body">
+                    <div class="d-flex justify-content-center">
+                        <h1 class="display-4">Want to know more?</h1>
+                    </div>
+                    <p class="mt-4 mb-5">You want to know more about this project and following projects or you have some questions, issues or reports for me? Then go ahead and join my Discord Server.</p>
+                    <div class="d-flex justify-content-center">
+                        <a href="" class="btn btn-lg btn-info mt-5">Join Discord</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <img src="{% static 'img/discord.png' %}" style="height: 30rem !important; width: 100%;">
+        </div>
+    </div>
+    <div style="height: 15rem;">
+
+    </div>
+
+{% endblock %}

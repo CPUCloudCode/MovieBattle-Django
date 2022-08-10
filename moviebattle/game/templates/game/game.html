@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+<!-- JavaScript Bundle with Popper -->
+<link href="{% static 'css/audience.css' %}" rel="stylesheet"></link>
+{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-5 text-white">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 id="movie1Title">{{ c1.movie_text }}</h4>
+                <p id="voteMode" style="display: none;">{{ game.vote }}</p>
+            </div>
+            <div class="d-flex justify-content-center" style="height: 65%;">
+                <img id="movie1Img" src="{{ c1.href }}" width="100%">
+            </div>
+            <div class="d-flex justify-content-center">
+                <form id="movie1Vote" method="post" class="mt-4 w-50" action="{% url 'post' %}">
+                    {% csrf_token %}
+                    <p id="token" style="display: none;">{{ csrf_token }}</p>
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <button id="btnVote1" type="submit" class="btn btn-lg btn-outline-warning w-100">Vote for it</button>
+                </form>
+                <form id="movie1VoteHidden" style="display: none;" method="post" class="mt-4 w-50" action="{% url 'post' %}">
+                    {% csrf_token %}
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <input id="movie1WinnerInput" type="text" name="winner_title" value="{{ c1.movie_text }}" style="display: none;">
+                    <input id="movie1LoserInput" type="text" name="loser_title" value="{{ c2.movie_text }}" style="display: none;">
+                    <button id="btnVote1" type="submit" class="btn btn-lg btn-outline-warning w-100">Vote for it</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="d-flex justify-content-center text-white">
+                <h1 class="display-1">VS</h1>
+            </div>
+            <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5" style="width: 14rem;">
+                <div class="d-flex justify-content-between mb-4">
+                    {% if game.vote %}
+                        <span id="vote1" class="badge rounded-pill bg-primary" style="font-size: 1.2rem;">0 Votes</span>
+                        <span id="vote2" class="badge rounded-pill bg-primary" style="font-size: 1.2rem;">0 Votes</span>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-center mb-3">
+                    {% if game.vote %}
+                    <button id="check" class="btn btn-outline-primary btn-lg">Check Votes</button>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-center" style="margin-bottom: 4rem !important;">
+                    <h1 id="rounds" class="text-white display-2">{{ game.round }}/{{ game.rounds }}</h1>
+                </div>
+            </div>
+            <div class="position-absolute bottom-0 start-50 translate-middle-x mb-2">
+                <div class="base mb-4">
+                    <span class="mail-info">
+                        <span id="gameId" class="mail-text" tooltip="Click to Copy" style="font-size: 0.9rem !important;" tooltip-position="up">{{ id }}</span>
+                    </span>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-5 text-white">
+            <div class="d-flex justify-content-center mb-3">
+                <h4 id="movie2Title">{{ c2.movie_text }}</h4>
+            </div>
+            <div class="d-flex justify-content-center" style="height: 65%;">
+                <img id="movie2Img" src="{{ c2.href }}" width="100%">
+            </div>
+            <div class="d-flex justify-content-center">
+                <form id="movie2Vote" method="post" class="mt-4 w-50" action="{% url 'post' %}">
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <button id="btnVote2" type="submit" class="btn btn-lg btn-outline-warning w-100">Vote for it</button>
+                </form>
+                <form id="movie2VoteHidden" style="display: none;" method="post" class="mt-4 w-50" action="{% url 'post' %}">
+                    {% csrf_token %}
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <input id="movie2WinnerInput" type="text" name="winner_title" value="{{ c2.movie_text }}" style="display: none;">
+                    <input id="movie2LoserInput" type="text" name="loser_title" value="{{ c1.movie_text }}" style="display: none;">
+                    <button id="btnVote2" type="submit" class="btn btn-lg btn-outline-warning w-100">Vote for it</button>
+                </form>
+            </div>
+        </div>
+        <!--<div class="col-5">
+            <div class="d-flex justify-content-center">
+                <div class="card w-100 h-75 text-white bg-dark">
+                    <div class="card-header text-center" style="height: 5rem;">
+                        <h3 id="movie2Title">{{ c2.movie_text }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <img id="movie2Img" src="{% static 'img/harry-potter.jpg' %}" alt="" height="530" width="500">
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                
+                <form id="movie2Vote" method="post" class="mt-4 w-50" action="{% url 'run' %}">
+                    <input type="text" name="id" value="{{ id }}" style="display: none;">
+                    <input type="text" name="winner_title" value="{{ c1.movie_text }}" style="display: none;">
+                    <input type="text" name="loser_title" value="{{ c2.movie_text }}" style="display: none;">
+                    <button type="submit" class="btn btn-lg btn-outline-warning w-100">Vote for it</button>
+                </form>
+            </div>
+        </div>-->
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="{% static 'js/game.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,92 @@
+.base{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+} 
+.mail-info {
+		font-family: Nunito, sans-serif;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		padding: 16px 36px;
+		border-radius: 8px;
+		background: white;
+		letter-spacing: 0.3px;
+		box-shadow: 0px 12px 17px rgba(0,0,0,0.26);
+		font-weight: 600;
+}
+
+.mail-text {
+		font-size: 20px;
+}
+
+[tooltip]{
+    position: relative;
+}
+
+[tooltip]::before {
+    content: "";
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px 6px 0 6px;
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+    z-index: 100;
+    opacity: 0;
+    transition: all 250ms ease;
+}
+
+[tooltip]::after {
+    content: attr(tooltip);
+    position: absolute;
+    left: 50%;
+    top: -6px;
+    transform: translateX(-50%) translateY(-100%);
+    background: #fff;
+    text-align: center;
+    color: #00afda;
+    padding: 4px 8px;
+    font-size: 14px;
+    min-width: 80px;
+    border-radius: 4px;
+    pointer-events: none;
+    opacity: 0;
+    transition: all 250ms ease;
+}
+
+[tooltip-position ='bottom']::before {
+    top: 100%;
+    margin-top: 36px;
+    transform: translateX(-50%) translatey(-100%) rotate(-180deg)
+}
+
+[tooltip-position='bottom']::after {
+    top: 100%;
+    margin-top: 36px;
+    transform: translateX(-50%) translateY(0);
+}
+
+[tooltip]:hover::after,
+[tooltip]:hover::before {
+    opacity: 1;
+}
+
+.card {
+    padding: 1.5em .5em .5em;
+    border-radius: 2em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+
+  
+.alert{
+    display: none;
+}
+
+.form-check {
+    font-size: 2.2rem;
+}

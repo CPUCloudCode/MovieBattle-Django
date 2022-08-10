@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="d-flex justify-content-center">
+        <div class="card mt-5">
+            <div class="card-body text-white bg-dark">
+                <form action="{% url 'run' %}" method="post">
+                    {% csrf_token %}
+                    <h1 class="display-2">Movie Contest</h1>
+                    <h5><label for="roundSelect" class="form-label mt-5">Runden</label></h5>
+                    <select id="roundSelect" class="form-select" aria-label="Default select example" name="rounds">
+                        <option selected value="4">4</option>
+                        <option value="8">8</option>
+                        <option value="16">16</option>
+                        <option value="32">32</option>
+                        <!--<option value="64">64</option>-->
+                    </select>
+                    <h5><label for="categorySelect" class="form-label mt-4">Movie Category</label></h5>
+                    <select id="categorySelect" class="form-select" aria-label="Default select example" name="category">
+                        <option selected value="All">All</option>
+                        <option value="popular">Popular and New</option>
+                        <option value="disney">Disney</option>
+                        <option value="netflix">Netflix</option>
+                        <option value="dreamworks">DreamWorks Animation</option>
+                        <option value="marvel">Marvel</option>
+                        <option value="action">Action</option>
+                        <option value="animation">Animation</option>
+                    </select>
+                    <div class="row mt-5">
+                        <div class="col">
+                            <button type="submit" class="btn btn-outline-primary btn-lg">Start Solo Game</button>
+                        </div>
+                        <div class="col d-flex justify-content-end">
+                            <a href="{% url 'audience' %}" class="btn btn-outline-warning btn-lg">Audience-Modus</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
