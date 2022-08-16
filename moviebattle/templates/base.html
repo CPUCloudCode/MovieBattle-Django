@@ -28,14 +28,13 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
         <div class=" collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto ">
             <li class="nav-item">
               <a class="nav-link mx-2 {% if '/' == request.path %}active{% endif %}" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-2 {% if 'about-us' in request.path %}active{% endif %}" href="/about-us">About us</a>
+              <a class="nav-link mx-2 {% if 'about-us' in request.path %}active{% endif %}" href="/about-us">About Us</a>
             </li>
             <li class="nav-item">
               <a class="nav-link mx-2 {% if 'howto' in request.path %}active{% endif %}" href="/howto">How to Play</a>

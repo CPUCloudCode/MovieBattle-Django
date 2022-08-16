@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/game/index.css' %}">
+{% endblock %}
 {% block content %}
-    <div class="d-flex justify-content-center">
+    <div class="d-flex justify-content-center" style="display: none !important;">
         <div class="card mt-5">
             <div class="card-body text-white bg-dark">
                 <form action="{% url 'run' %}" method="post">
@@ -38,4 +41,213 @@
             </div>
         </div>
     </div>
+
+    <div class="row mt-5">
+        <div class="col-6">
+            <div class="card bg-dark text-white" style="height: 35rem; width:100%">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Solo-a-star-wars-story-tall-A_%28cropped%29.png/800px-Solo-a-star-wars-story-tall-A_%28cropped%29.png" class="card-img-top" height="50%">
+                <div class="card-body">
+                    <h2 class="card-title">Play A Solo Game</h2>
+                    <h5 class="card-text">Start a solo game right now and select your greatest movie</h5>
+                    <form action="{% url 'run' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <h5><label for="roundSelect" class="form-label">Runden</label></h5>
+                                <select id="roundSelect" class="form-select" aria-label="Default select example" name="rounds">
+                                    <option selected value="4">4</option>
+                                    <option value="8">8</option>
+                                    <option value="16">16</option>
+                                    <option value="32">32</option>
+                                    <!--<option value="64">64</option>-->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <h5><label for="categorySelect" class="form-label">Movie Category</label></h5>
+                                <select id="categorySelect" class="form-select" aria-label="Default select example" name="category">
+                                    <option selected value="All">All</option>
+                                    <option value="popular">Popular and New</option>
+                                    <option value="disney">Disney</option>
+                                    <option value="netflix">Netflix</option>
+                                    <option value="dreamworks">DreamWorks Animation</option>
+                                    <option value="marvel">Marvel</option>
+                                    <option value="action">Action</option>
+                                    <option value="animation">Animation</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mt-5 d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Start Solo Game</button>
+                        </div>
+                    </form>
+                </div>
+                <div>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card bg-dark text-white" style="height: 35rem; width:100%">
+                <img src="https://st3.depositphotos.com/1001599/17060/i/600/depositphotos_170606960-stock-photo-versus-vs-sign-in-fire.jpg" class="card-img-top" height="50%">
+                <div class="card-body">
+                    <h2 class="card-title">Host An Audience Game</h2>
+                    <h5 class="card-text">Do you want to play with your friends or your audience and discuss which movie is the greatest there is? Then go into the Audience Mode and host a game right now!</h5>
+                </div>
+                <div class="d-flex justify-content-center mb-2">
+                    <a href="{% url 'audience' %}" class="btn btn-lg btn-warning mt-5">Host An Audience Game</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-12 movie-select" link="all">
+              <div class="square-card">
+                <a href="#" alt="square card">
+                    <div class="card-header card-all">
+                    <div class="card-header_overlay">
+                        <span class="pill pill-green">All</span>
+                    </div>
+                    </div>
+                    <div class="card-title">
+                        <h4>Play with every movie available</h4>			
+                    </div>
+                    <div class="cta">
+            <!-- 			<a >view recipe</a> -->
+                        <a >Play now</a>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="popular">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-popular">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-blue">Popular and New</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with popular and new movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="animation">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-animation">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-red">Animation</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with animation movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="action">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-action">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-dark">Action</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with action movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="disney">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-disney">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-light-blue">Disney</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with disney movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="netflix">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-netflix">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-dark-red">Netflix</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with Netflix Movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="dreamworks">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-dreamworks">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-dreamworks">DreamWorks</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with dreamworks movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-12 movie-select" link="marvel">
+            <div class="square-card">
+              <a href="#" alt="square card">
+                  <div class="card-header card-marvel">
+                  <div class="card-header_overlay">
+                      <span class="pill pill-marvel">Marvel</span>
+                  </div>
+                  </div>
+                  <div class="card-title">
+                      <h4>Play with marvel movies</h4>			
+                  </div>
+                  <div class="cta">
+          <!-- 			<a >view recipe</a> -->
+                      <a> Play now</a>
+                  </div>
+              </a>
+            </div>
+        </div>
+    </div>
+    
+
+{% endblock %}
+{% block javascript %}
+<script src="{% static 'js/game/index.js' %}"></script>
 {% endblock %}

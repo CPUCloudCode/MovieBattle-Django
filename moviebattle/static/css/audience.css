@@ -90,3 +90,13 @@
 .form-check {
     font-size: 2.2rem;
 }
+
+.strong-active {
+    font-weight: bold;
+    color: rgb(3, 201, 46);
+}
+.strong-inactive {
+    font-weight: normal;
+    color: rgb(255, 255, 255);
+    text-decoration: line-through;
+}

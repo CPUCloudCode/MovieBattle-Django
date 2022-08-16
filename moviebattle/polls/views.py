@@ -27,3 +27,8 @@ def statistics(request):
     
     template = loader.get_template('polls/statistics.html')
     return HttpResponse(template.render({}, request))
+
+def credit(request):
+    
+    template = loader.get_template('polls/credit.html')
+    return HttpResponse(template.render({}, request))
