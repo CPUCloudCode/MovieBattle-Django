@@ -6,7 +6,7 @@ body {
 .square-card {
 	width: 255px;
 /* 	height: 22.5rem; */
-	border-radius: 6px;
+	border-radius: 2em;
 	background: rgb(56, 56, 56);
 	text-align: left;
 	position: relative;
@@ -15,6 +15,7 @@ body {
 /* 	border-radius: 6px; */
 	margin-bottom: 20px;
 	margin-top: 20px;
+
 }
 .square-card:hover {
 	box-shadow: 2px 4px 8px 0px rgba(248, 248, 248, 0.993);
@@ -43,12 +44,16 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
  	background-size: cover !important; 
-	border-top-left-radius: 6px;
-	border-top-right-radius: 6px;
+	border-top-left-radius: 2em !important;
+	border-top-right-radius: 2em !important;
+}
+
+#cards .card-title {
+	height: 8rem;
 }
 
 .card-all {
-    background-image: url('http://opendeeptech.com/wp-content/uploads/2018/03/movies.jpg');
+    background-image: url('https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/best-movies-1614634680.jpg');
 }
 .card-popular {
     background-image: url('https://s.studiobinder.com/wp-content/uploads/2020/04/Best-Movies-of-2014-Featured.jpg');

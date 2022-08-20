@@ -17,3 +17,8 @@ p {
     font-family: 'Indie Flower', cursive;
     font-size: 1.9rem;
 }
+
+img, .card {
+    border-radius: 2em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2)
+}

@@ -80,6 +80,7 @@
     $("#movie1Vote").submit(function (e) {
         // preventing from page reload and default actions
         e.preventDefault();
+        $('#btnVote1').toggleClass("disabled")
         datas = {
             "id": $('#gameId').text(),
             "winner_title": $('#movie1Title').text(),
@@ -107,6 +108,7 @@
                 $('#movie2Title').text(movie2)
                 $('#rounds').text(round + "/" + rounds)
                 console.log(response)
+                $('#btnVote1').toggleClass("disabled")
                 $('#btnVote1').blur()
                 $('#btnVote2').blur()
                 $("#vote1").text("0 Votes")
@@ -170,13 +172,14 @@
     $("#movie2Vote").submit(function (e) {
         // preventing from page reload and default actions
         e.preventDefault();
+        
         datas = {
             "id": $('#gameId').text(),
             "winner_title": $('#movie2Title').text(),
             "loser_title": $('#movie1Title').text(),
             csrfmiddlewaretoken: $('#token').text(), 
         }
-        
+        $('#btnVote2').toggleClass("disabled")
         // serialize the data for sending the form data.
         // make POST ajax call
         $.ajax({
@@ -200,6 +203,7 @@
 
                 $('#btnVote2').blur()
                 $('#btnVote1').blur()
+                $('#btnVote2').toggleClass("disabled")
                 $("#vote1").text("0 Votes")
                 $("#vote2").text("0 Votes")
                 $('#vote1').removeClass('bg-primary')

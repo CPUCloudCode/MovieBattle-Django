@@ -100,7 +100,34 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 col-sm-12 movie-select" link="all">
+        <div class="col-9">
+            <div class="btn-group mt-5" role="group" aria-label="Basic radio toggle button group">
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                <label class="btn btn-lg btn-outline-light" for="btnradio1">Presented Sets</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+                <label class="btn btn-lg btn-outline-light" for="btnradio2">Marketplace Sets</label>
+              
+                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+                <label class="btn btn-lg btn-outline-light" for="btnradio3">Own Sets</label>
+            </div>
+        </div>
+        <div class="col-2 text-white d-flex align-items-center flex-column">
+            <h3 class="mt-auto">Rundenanzahl:</h3>
+        </div>
+        <div class="col-1 d-flex align-items-center flex-column">
+            <select id="roundSelect" class="form-select mt-auto btn-lg mr-5" aria-label="Default select example" name="rounds">
+                <option selected value="4">4</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
+                <option value="32">32</option>
+                <option value="64">64</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="row" id="cards">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="all">
               <div class="square-card">
                 <a href="#" alt="square card">
                     <div class="card-header card-all">
@@ -111,14 +138,10 @@
                     <div class="card-title">
                         <h4>Play with every movie available</h4>			
                     </div>
-                    <div class="cta">
-            <!-- 			<a >view recipe</a> -->
-                        <a >Play now</a>
-                    </div>
                 </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="popular">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="popular">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-popular">
@@ -129,14 +152,11 @@
                   <div class="card-title">
                       <h4>Play with popular and new movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+            
               </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="animation">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="animation">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-animation">
@@ -147,14 +167,11 @@
                   <div class="card-title">
                       <h4>Play with animation movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+                  
               </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="action">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="action">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-action">
@@ -165,14 +182,11 @@
                   <div class="card-title">
                       <h4>Play with action movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+                  
               </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="disney">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="disney">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-disney">
@@ -183,14 +197,11 @@
                   <div class="card-title">
                       <h4>Play with disney movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+                  
               </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="netflix">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="netflix">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-netflix">
@@ -201,14 +212,11 @@
                   <div class="card-title">
                       <h4>Play with Netflix Movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+                  
               </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="dreamworks">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="dreamworks">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-dreamworks">
@@ -219,14 +227,11 @@
                   <div class="card-title">
                       <h4>Play with dreamworks movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+                  
               </a>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 movie-select" link="marvel">
+        <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="marvel">
             <div class="square-card">
               <a href="#" alt="square card">
                   <div class="card-header card-marvel">
@@ -237,10 +242,7 @@
                   <div class="card-title">
                       <h4>Play with marvel movies</h4>			
                   </div>
-                  <div class="cta">
-          <!-- 			<a >view recipe</a> -->
-                      <a> Play now</a>
-                  </div>
+                  
               </a>
             </div>
         </div>

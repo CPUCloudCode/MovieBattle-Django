@@ -67,6 +67,10 @@ body {
     letter-spacing: -.05rem;
   }
   
+  .card {
+    border-radius: 2em;
+    box-shadow: 0 10px 15px rgba(0.2, 0.2, 0.2, .2)
+  }
   
   /* RESPONSIVE CSS
   -------------------------------------------------- */
@@ -89,4 +93,6 @@ body {
       margin-top: 7rem;
     }
   }
+
+
   
