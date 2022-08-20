@@ -840,11 +840,10 @@ def canVote(request):
 
 class GameIndex(View):
     def get(self, request, *args, **kwargs):
-        template = loader.get_template('game/gameIndex.html')
         data = {
             "id": kwargs['gameId']
         }
-        return render(request, 'game/gameIndex.html', data)
+        return render(request, 'game/gameIndex2.html', data)
 
 class VoteView(View):
     def get(self, request, *args, **kwargs):
@@ -1059,6 +1058,10 @@ def runPost2(request):
     return render(request, 'game/game.html', context)
 
 def runPost(request):
+    if not request.POST.get('id'):
+        template = loader.get_template('game/holder.html')
+        return HttpResponse(template.render({}, request))
+
     gameId = request.POST.get('id')
     winner_title = request.POST.get("winner_title")
     loser_title = request.POST.get("loser_title")

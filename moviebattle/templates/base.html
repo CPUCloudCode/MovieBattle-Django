@@ -19,6 +19,50 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css" integrity="sha384-eoTu3+HydHRBIjnCVwsFyCpUDZHZSFKEJD0mc3ZqSBSb6YhZzRHeiomAUWCstIWo" crossorigin="anonymous">
     {% block style %}
     {% endblock %}
+    <style>
+      .cookie-consent{
+        position: fixed;
+        top: 20%;
+        left: 30%;
+        padding-top: 7px;
+        height: 83px;
+        display: none;
+        line-height: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 1.3rem;
+        background: #292929;
+        z-index: 120;
+        cursor: pointer;
+        border-radius: 3px;
+        color: black !important;
+      }
+      .cookie-consent .card {
+        width: 40rem;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid #d2d2dc;
+        border-radius: 6px;
+        -webkit-box-shadow: 0px 0px 5px 0px rgb(249, 249, 250);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1);
+        box-shadow: 0px 0px 5px 0px rgb(161, 163, 164);
+      }
+
+      .cookie-consent .cookies a {
+        text-decoration: none;
+        color: #000 !important;
+        margin-top: 8px;
+      }
+
+      .cookie-consent .cookies a:hover {
+        text-decoration: none;
+        color: blue;
+        margin-top: 8px;
+      }
+    </style>
   </head>
   <body>
     
@@ -62,10 +106,21 @@
         </div>
       </div>
     </nav>
-      
     <div class="container" id="container" style="height: 100vh;">
       {% block content %}
       {% endblock %}
+    </div>
+
+    <div class="cookie-consent">
+
+      <div class="d-flex justify-content-center">
+        <div class="d-flex align-items-center align-self-center card p-3 text-center cookies"><img src="https://i.imgur.com/Tl8ZBUe.png" width="50"><span class="mt-4">We use third party cookies to personalize content, ads and analyze site traffic.</span><a class="d-flex align-items-center mt-4" href="#">If you want to know more, go to our Privacy Policy page<i class="fa fa-angle-right ml-2"></i></a>
+            <button
+                id="btnCookie" class="btn btn-lg btn-dark mt-5 px-4" type="button">Alright, got it!</button>
+        </div>
+    </div>  
+
+      
     </div>
 
     {% block footer %}
@@ -123,6 +178,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <script>
+      function setCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+      }
+      function getCookie(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for(var i=0;i < ca.length;i++) {
+              var c = ca[i];
+              while (c.charAt(0)==' ') c = c.substring(1,c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+          }
+          return null;
+      }
+      if(getCookie("cookiesAllowed") == null || getCookie("cookiesAllowed")=="false") {
+        $('.cookie-consent').show()
+      }
+      $('#btnCookie').click(function() {
+        setCookie("cookiesAllowed", "true")
+        $('.cookie-consent').fadeOut()
+      })
+    </script>
     {% block javascript %}
     {% endblock %}
   </body>

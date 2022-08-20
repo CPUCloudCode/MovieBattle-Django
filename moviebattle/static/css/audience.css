@@ -100,3 +100,27 @@
     color: rgb(255, 255, 255);
     text-decoration: line-through;
 }
+
+
+/* Game Index */
+.job-card {
+    border-radius: 2em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2)
+}
+
+.job-card .bi {
+    font-size: 1.8rem; 
+}
+
+.job-image {
+    height: match-parent;
+    border-radius: 2em;
+    object-fit: cover;
+    height: 28rem;
+    width: 20rem;
+}
+
+.job-image:hover {
+    scale: 1.2;
+    cursor: pointer;
+}
