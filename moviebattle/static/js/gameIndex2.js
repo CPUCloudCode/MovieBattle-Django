@@ -34,6 +34,10 @@ copyMailId.forEach(copyText => {
 $("#sendForm").submit(function (e) {
     // preventing from page reload and default actions
     e.preventDefault();
+    if(!$('#url').val()) {
+        $("#check").click()
+        return;
+    }
     datas = {
         "id": $('#gameId').text(),
         "title": $('#movie').val(),
