@@ -1,0 +1,58 @@
+.navbar-sub .nav-item {
+    margin-right: 5rem;
+    margin-left: 5rem;
+}
+
+.navbar-sub {
+    background-color: #151F2E !important;
+}
+
+.userCard {
+    background-color: #151F2E !important;
+    max-height: 67rem;
+    overflow-y: scroll; /* Add the ability to scroll */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.statisticCard {
+    background-color: #151F2E !important;
+    height: 7rem;
+}
+
+.userCustomCard {
+    height: 7rem;
+}
+
+.statistic-line {
+    font-size: 1.4rem;
+}
+
+.userCard::-webkit-scrollbar {
+    display: none;
+  }
+
+.bg-admin {
+    background-color: darkred;
+}
+
+.shadow {
+    text-shadow: 2px 2px black;
+}
+.favourite-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 2em;
+}
+
+.background-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+  
+
+
+/** Sidebar **/
+  
+  
+  

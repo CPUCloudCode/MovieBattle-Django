@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game.apps.GameConfig',
+    'user.apps.UserConfig',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 BASE_URL="localhost:8080"
+LOGOUT_REDIRECT_URL = "/"
+LOGIN_REDIRECT_URL = "/"
 
 TEMPLATES = [
     {
@@ -65,7 +68,8 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(BASE_DIR, 'templates'),
             os.path.join(BASE_DIR, 'polls', 'templates'),
-            os.path.join(BASE_DIR, 'game', 'templates')
+            os.path.join(BASE_DIR, 'game', 'templates'),
+            os.path.join(BASE_DIR, 'user', 'templates')
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -154,7 +158,7 @@ LOGGING = {
             'level': 'INFO',
         },
     },
-    }
+}
 
-LOGIN_REDIRECT_URL = 'index'
-LOGOUT_REDIRECT_URL = 'index'
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / 'media'

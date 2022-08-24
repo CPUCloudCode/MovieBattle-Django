@@ -46,6 +46,24 @@ body {
  	background-size: cover !important; 
 	border-top-left-radius: 2em !important;
 	border-top-right-radius: 2em !important;
+	
+}
+
+.set-card {
+	border-radius: 2em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+	transition: box-shadow 0.3s ease, border 0.3s ease;
+	box-shadow: 12px 15px 20px 0px rgb(255, 255, 255);
+}
+
+.set-card:hover {
+	box-shadow: 2px 4px 8px 0px rgba(248, 248, 248, 0.993);
+}
+
+.set-card img {
+	border-top-left-radius: 2em;
+	border-top-right-radius: 2em;
+	height: 12rem !important;
 }
 
 #cards .card-title {

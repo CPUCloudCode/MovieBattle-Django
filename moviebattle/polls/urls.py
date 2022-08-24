@@ -9,4 +9,5 @@ urlpatterns = [
     path('policy', views.policy, name='policy'),
     path('statistics', views.statistics, name='statistics'),
     path('credit', views.credit, name='credit'),
+    path("signup/", views.SignUp.as_view(), name="signup"),
 ]

@@ -1,6 +1,8 @@
 from asyncio.log import logger
 from ipaddress import ip_address
+import json
 import logging
+import uuid
 from django.shortcuts import render
 
 from django.http import HttpResponse, JsonResponse
@@ -9,8 +11,9 @@ from django.template import loader
 from django.views.generic import View
 from django.utils import timezone
 import random
+from django.contrib.auth.decorators import login_required
 
-from .models import Game, Movie
+from .models import Game, Movie, Set
 
 movie_titles = [
     "Harry Potter and the Philosopher's Stone",
@@ -1326,3 +1329,90 @@ def get_client_ip(request):
     return ip
         
    
+class HostIndex(View):
+    def get(self, request, *args, **kwargs):
+        setId = kwargs['setId']
+        
+        set = get_object_or_404(Set, id=setId)
+        
+        movies = set.entertainment_set.all()
+
+        logger.warning("Movielist: " + str(movies) + " - " + str(len(movies)))
+
+        context = {
+            "set": set,
+            "id": str(set.id),
+            "entries": len(movies)
+        }
+        return render(request, 'game/game_host.html', context)
+
+def postHostGame(request):
+    
+    logger.warning("ID: " + request.POST.get('id'))
+    logger.warning("Mode: " + request.POST.get('mode'))
+
+    setId = request.POST.get('id')
+    mode = request.POST.get('mode')
+    rounds = request.POST.get('rounds')
+    
+    # Get Set
+    set = get_object_or_404(Set, id=setId)
+    
+    # Create new Game
+    game = Game(pub_date=timezone.now(), rounds=rounds)
+    game.save()
+    if mode == "multiplayer":
+        game.vote = True
+    
+    # Randomize Set Movie List
+    entertainmentRandom = list(set.entertainment_set.all()).copy()
+    random.shuffle(entertainmentRandom)
+
+    # Copy Movies from Set to Game
+    for x in range(int(rounds)*2):
+        entertainment = entertainmentRandom[x]
+        game.movie_set.create(movie_text=entertainment.title, href=entertainment.href)
+        
+    # Go on
+    copy = game.movie_set.all()
+
+    rndChoice = random.choice(copy)
+    c1 = rndChoice
+    rndChoice = random.choice(copy)
+    while rndChoice==c1:
+        rndChoice = random.choice(copy)
+    c2 = rndChoice
+
+    context = {
+        "game": game,
+        "c1": c1,
+        "c2": c2,
+        "id": str(game.id)
+    }
+    game.c1 = c1.movie_text
+    game.c2 = c2.movie_text
+    logger.warning("C1-HREF: " + c1.href)
+    logger.warning("C2-HREF: " + c2.href)
+    game.started = True
+    game.save()
+    return render(request, 'game/game.html', context)
+    logger.warning("Funktionier!")
+    logger.warning("Game: " + str(game))
+
+def marketplaceView(request):
+     # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the nick name from the client side.
+        sets = Set.objects.all().values()
+        ren = []
+        for set in sets:
+            logger.warning("---------------------------------------")
+            logger.warning("OBJ: " + str(set))
+            logger.warning("ID: " + str(set['id']) + " - " + str(set['title']))
+            object = {"id": str(set['id']), "title": str(set['title']), "poster": str(set['poster']), "description": str(set['description'])}
+            logger.warning("Object: " + str(object))
+            ren.append(object)
+        logger.warning("Ren: " + str(ren))
+        return JsonResponse({"test": ren}, status = 200)
+
+    return JsonResponse({}, status = 400)

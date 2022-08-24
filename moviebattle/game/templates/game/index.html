@@ -92,9 +92,10 @@
                 <div class="card-body">
                     <h2 class="card-title">Host An Audience Game</h2>
                     <h5 class="card-text">Do you want to play with your friends or your audience and discuss which movie is the greatest there is? Then go into the Audience Mode and host a game right now!</h5>
+                    <h4><strong>How it works: </strong>If you host an audience game, your friends or audience can send in movies</h4>
                 </div>
                 <div class="d-flex justify-content-center mb-2">
-                    <a href="{% url 'audience' %}" class="btn btn-lg btn-warning mt-5">Host An Audience Game</a>
+                    <a href="{% url 'audience' %}" class="btn btn-lg btn-warning mt-2">Host An Audience Game</a>
                 </div>
             </div>
         </div>
@@ -102,14 +103,11 @@
     <div class="row">
         <div class="col-9">
             <div class="btn-group mt-5" role="group" aria-label="Basic radio toggle button group">
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
-                <label class="btn btn-lg btn-outline-light" for="btnradio1">Presented Sets</label>
-              
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
-                <label class="btn btn-lg btn-outline-light" for="btnradio2">Marketplace Sets</label>
-              
-                <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
-                <label class="btn btn-lg btn-outline-light" for="btnradio3">Own Sets</label>
+                <button class="btn btn-lg btn-light" name="btnradio1" id="btnradio1">Presented Sets</button>
+                <form action="" id="marketplaceForm">
+                    <button class="btn btn-lg btn-outline-light" name="btnradio2" id="btnradio2">Marketplace Sets</button>
+                </form>
+                <button class="btn btn-lg btn-outline-light" name="btnradio3" id="btnradio3">Own Sets</button>
             </div>
         </div>
         <div class="col-2 text-white d-flex align-items-center flex-column">
@@ -125,8 +123,10 @@
             </select>
         </div>
     </div>
-    
-    <div class="row" id="cards">
+    <div class="row" id="marketplace" style="display: none;">
+
+    </div>
+    <div class="row" id="presented">
         <div class="col-md-3 col-sm-12 movie-select d-flex align-items-center flex-column" link="all">
               <div class="square-card">
                 <a href="#" alt="square card">

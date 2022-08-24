@@ -1,0 +1,305 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+<link href="{% static 'css/user/settings.css' %}" rel="stylesheet"></link>
+<style>
+    #container {
+        height: 100% !important;
+        margin-bottom: 5rem;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<div class="alert alert-success w-100" style="display: none;" role="alert">
+  <h5><strong>Success!</strong>
+  Your Settings were successfully updated
+  </h5>
+</div>
+<div class="alert alert-danger w-100" style="display: none;" role="alert">
+  <h5><strong>Failure!</strong>
+  Sorry, Something went wrong. Try again later!
+  </h5>
+</div>
+<div class="alert alert-warning w-100" style="display: none;" role="alert">
+  <h5><strong>Permission denied!</strong>
+  You have not the right permission to use this!
+  </h5>
+</div>
+{% if user.is_staff or user.details.moderator or user.details.premium  %}
+<p id="rank" style="display: none;">premium</p>
+{% else %}
+<p id="rank" style="display: none;">default</p>
+{% endif %}
+<div class="row">
+    <div class="col-4">
+        <div class="card card-custom text-white">
+            <div class="card-body">
+              <div class="flex-shrink-0 p-3 text-white" style="width: 100%;">
+                <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+                  <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+                  <span class="fs-2 fw-semibold text-white">Navigator</span>
+                </a>
+                <ul class="list-unstyled ps-0">
+                  <li class="mb-1">
+                    <button class="btn btn-toggle align-items-center rounded collapsed fs-4 text-white" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
+                      Account
+                    </button>
+                    <div class="collapse show" id="home-collapse">
+                      <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                        <li><a href="#" id="linkProfile" class="link-light rounded fs-5">Profile</a></li>
+                        <li><a href="#" id="linkFavourite" class="link-light rounded fs-5">Favourite</a></li>
+                        <li><a href="#" class="link-light rounded fs-5">Settings</a></li>
+                      </ul>
+                    </div>
+                  </li>
+                  
+                </ul>
+              </div>
+                
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card card-custom text-white">
+            <div class="card-body">
+                <form id="updateForm" action="update/" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <p id="token" style="display: none;">{{ csrf_token }}</p>
+                    <p id="url" style="display: none;">{% url 'update' %}</p>
+                    <h3 class="mb-5">Hey there, here you can personalize your profile!</h3>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Write your profile description here - Code is possible<i></i></label>
+                    <textarea class="form-control fs-6 bg-dark text-white" id="description" rows="20" name="description">{{user.details.description}}</textarea>
+                </div>
+                <div class="mt-4">
+                    <strong>Avatar</strong>
+                    <p>Allowed Formats: JPEG, PNG. Max size: 3mb. Optimal dimensions: 230x230</p>
+                    <div>
+                        <label for="formFileAvatar" class="form-label">Select file</label>
+                        <input class="form-control form-control-lg" id="formFileAvatar" type="file" name="formFileAvatar" accept=".jpg,.gif,.png">
+                    </div>
+                    <img id="avatarPreview" class="mt-4" src="/media/{{user.details.profile_image}}" alt="">
+                </div>
+                <div class="mt-4">
+                    <strong>Banner</strong>
+                    <p>Allowed Formats: JPEG, PNG. Max size: 6mb. Optimal dimensions: 1700x330</p>
+                    <div>
+                        <label for="formFileBanner" class="form-label">Select file</label>
+                        <input class="form-control form-control-lg" id="formFileBanner" type="file" name="formFileBanner" accept=".jpg,.gif,.png">
+                    </div>
+                    <img id="bannerPreview" class="mt-4" src="/media/{{user.details.background_image}}" alt="">
+                </div>
+                <button class="btn btn-lg btn-primary mt-5" value="Upload" type="submit">Save Changes</button>
+              </form>
+
+              <!-- Favourite -->
+              <div id="favourites" style="display: none;">
+                  <strong>Favourite Movie</strong>
+                  <p>Here you can select your favourite movie!</p>
+                  <div>
+                      <label for="favourite-movie" class="form-label">Select Movie</label>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="favouriteMovie" placeholder="Movie Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-warning btn-lg" type="button" id="favouriteMovieBtn">Search Movie</button>
+                      </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col">
+                      <h4>Current Favourite</h4>
+                      {% if user.details.favourite_movie %}
+                      <img class="favourite-image" id="favouriteMovieImg" src="{{user.details.favourite_movie}}" alt="">
+                      {% else %}
+                      <img class="favourite-image" id="favouriteMovieImg" src="http://image.tmdb.org/t/p/w500//tzve3LD534wsCnhOrSqgJ1mnRma.jpg" alt="">
+                      {% endif %}
+                    </div>
+                    <div class="col" id="previewMovie">
+                      <h4>Preview Favourite</h4>
+                    </div>
+                  </div>
+                  <!-- Favourite Series -->
+                  <strong>Favourite Series</strong>
+                  <p>Here you can select your favourite series!</p>
+                  <div>
+                      <label for="favourite-series" class="form-label">Select Series</label>
+                      <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="favouriteSeries" placeholder="Series Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-warning btn-lg" type="button" id="favouriteSeriesBtn">Search Series</button>
+                      </div>
+                  </div>
+                  <div class="row mt-4">
+                    <div class="col">
+                      <h4>Current Favourite</h4>
+                      {% if user.details.favourite_series %}
+                      <img class="favourite-image" id="favouriteSeriesImg" src="{{user.details.favourite_series}}" alt="">
+                      {% else %}
+                      <img class="favourite-image" id="favouriteSeriesImg" src="http://image.tmdb.org/t/p/w500//tzve3LD534wsCnhOrSqgJ1mnRma.jpg" alt="">
+                      {% endif %}
+                    </div>
+                    <div class="col" id="previewSeries">
+                      <h4>Preview Favourite</h4>
+                    </div>
+                  </div>
+                  <form id="updateFavourite" action="">
+                    {% csrf_token %}
+                    <p id="token" style="display: none;">{{csrf_token}}</p>
+                    <button class="btn btn-lg btn-primary mt-3">Update Favourites</button>
+                  </form>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/user/settings.js' %}"></script>
+{% endblock %}
+
+{% block footer %}
+    <!-- Remove the container if you want to extend the Footer to full width. -->
+
+    <!-- Footer -->
+    <footer
+            class="text-center text-lg-start text-white"
+            style="background-color: #1c2331"
+            >
+      <!-- Section: Social media -->
+      <section
+               class="d-flex justify-content-between p-4"
+               style="background-color: #6351ce"
+               >
+        <!-- Left -->
+        <div class="me-5 ml-5">
+          <span>Get connected with us on social networks:</span>
+        </div>
+        <!-- Left -->
+  
+        <!-- Right -->
+        <div class="footerIcons">
+          <a href="" class="text-white me-4">
+            <i class="bi bi-facebook"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-twitter"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-google"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-linkedin"></i>
+          </a>
+          <a href="" class="text-white me-4">
+            <i class="bi bi-github"></i>
+          </a>
+        </div>
+        <!-- Right -->
+      </section>
+      <!-- Section: Social media -->
+  
+      <!-- Section: Links  -->
+      <section class="">
+        <div class="container text-center text-md-start mt-5">
+          <!-- Grid row -->
+          <div class="row mt-3">
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+              <!-- Content -->
+              <h6 class="text-uppercase fw-bold">Movie-Contest.live</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                Movie-Contest.live is an easy game to play alone, with your friends
+                or your audience in case you are a Streamer. 
+                In the future there will be more Updates and Patches.
+                Feel free to contact us if anything doesn't work or you have ideas!
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Products</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                <a href="#!" class="text-white">Movie-Contest.live</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Coming soon</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Coming soon</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Coming soon</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Useful links</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p>
+                <a href="{% url 'credit' %}" class="text-white">Credits</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Patchnotes</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Contact Form</a>
+              </p>
+              <p>
+                <a href="#!" class="text-white">Support</a>
+              </p>
+            </div>
+            <!-- Grid column -->
+  
+            <!-- Grid column -->
+            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+              <!-- Links -->
+              <h6 class="text-uppercase fw-bold">Contact</h6>
+              <hr
+                  class="mb-4 mt-0 d-inline-block mx-auto"
+                  style="width: 60px; background-color: #7c4dff; height: 2px"
+                  />
+              <p><i class="bi bi-house mr-3"></i> Germany</p>
+              <p><i class="bi bi-envelope mr-3"></i> support@movie-contest.a2hosted.com</p>
+            </div>
+            <!-- Grid column -->
+          </div>
+          <!-- Grid row -->
+        </div>
+      </section>
+      <!-- Section: Links  -->
+  
+      <!-- Copyright -->
+      <div
+           class="text-center p-3"
+           style="background-color: rgba(0, 0, 0, 0.2)"
+           >
+        © 2022 Copyright:
+        <a class="text-white" href="https://movie-contest.a2hosted.com" style="text-decoration: none;"
+           >Movie-Contest.live</a
+          >
+      </div>
+      <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+  
+  <!-- End of .container -->
+{% endblock %}
+

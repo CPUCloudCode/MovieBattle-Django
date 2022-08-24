@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}
+<link href="{% static 'css/user/user.css' %}" rel="stylesheet"></link>
+{% endblock %}
+{% block navviewcontent %}
+<div class="container text-white" style="height: 75%;">
+    <div class="row align-items-end h-100">
+        <div class="col-2">
+            {% if userview.details.profile_image  %}
+            <img src="/media/{{userview.details.profile_image}}" style="height: 12rem; width: 13rem;">
+            {% else %}
+            <img src="https://www.it-recht-web.de/wp-content/uploads/2018/10/filesharing-drei-fragezeichen-waldorf-frommer.jpg" style="height: 12rem; width: 13rem;">
+            {% endif %}
+        </div>
+        <div class="col">
+            {% if userview.is_staff  %}
+            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-admin">Admin</span></h2>
+            {% elif userview.details.moderator %}
+            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-danger">Moderator</span></h2>
+            {% elif userview.details.premium %}
+            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-warning">Premium</span></h2>
+            {% else %}
+            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} </h2>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block contentviewfull %} 
+     
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 navbar-sub">
+    <!-- Container wrapper -->
+    <div class="container-fluid">
+      <!-- Toggle button -->
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-mdb-toggle="collapse"
+        data-mdb-target="#navbarCenteredExample"
+        aria-controls="navbarCenteredExample"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <i class="fas fa-bars"></i>
+      </button>
+  
+      <!-- Collapsible wrapper -->
+      <div
+        class="collapse navbar-collapse justify-content-center"
+        id="navbarCenteredExample"
+      >
+        <!-- Left links -->
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Sets</a>
+          </li>
+          <!-- Navbar dropdown -->
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+              >Social</a
+            >
+          </li>
+        </ul>
+        <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+  </nav>
+<!--Register--> 
+<div class="container-xl mt-5">
+    <div class="row">
+        <div class="col">
+            <div class="card userCard w-100 text-white" >
+                <div class="card-body" id="user-card">
+                    <textarea id="user-description" style="display: none;">{{userview.details.description}}</textarea>  
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card userCard text-white w-100 mb-4">
+                <div class="card-body">
+                    Here are the stats! Thank you for for being a part of Movie-Contest!
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="card userCard text-white">
+                        <div class="card-body">
+                            <h3><i class="bi bi-door-closed"></i> Joined</h3>
+                            <p> {{userview.date_joined}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card userCard text-white">
+                        <div class="card-body">
+                            <h3><i class="bi bi-pc-display-horizontal"></i> Last Login</h3>
+                            <p> {{userview.last_login}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Rank Row -->
+            <div class="row mt-4">
+                <div class="col">
+                    {% if userview.is_authenticated and userview.is_staff  %}
+                    <div class="card userCustomCard bg-danger text-white"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Administrator</h4></div></div>
+                    {% elif userview.details.moderator %}
+                    <div class="card userCustomCard bg-danger text-white"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Moderator</h4></div></div>
+                    {% elif userview.details.premium %}
+                    <div class="card userCustomCard bg-warning text-dark"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Premium</h4></div></div>
+                    {% else %}
+                    <div class="card userCustomCard userCard text-white"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Default</h4></div></div>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <div class="card userCard userCustomCard text-white">
+                        <div class="card-body">
+                            {% if userview.is_authenticated and userview.is_staff  %}
+                            <p> Hey there. As an Admin of Movie-Contest I try my best to get the best out of me. But this is only possible thanks to you guys!</p>
+                            {% elif userview.details.moderator %}
+                            <p> Thank you for being a part of the Movie-Contest Team! You are helping to keep this site save and secure!</p>
+                            {% elif userview.details.premium %}
+                            <p> Thank you very much for supporting us. With your help we are able to keep this website online and continuesly improve the Features!</p>
+                            {% else %}
+                            <p> Welcome to Movie-Contest and thank you for using our website. Every single user is dear to us so thank you!</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="card statisticCard text-white">
+                        <div class="card-body">
+                            <h3><i class="bi bi-file-bar-graph"></i> Sets Created</h3>
+                            <p class="statistic-line mt-2"> 0 so far</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card statisticCard text-white">
+                        <div class="card-body">
+                            <h3><i class="bi bi-controller"></i> Solo Games</h3>
+                            <p class="statistic-line mt-2"> 0 so far</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="bg-danger border-4 border-top" style="background-color: grey;">
+            <div class="row mt-4">
+                <div class="col">
+                    <div class="card userCard text-white">
+                        <div class="card-body">
+                            <h3> Favourite Movie</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card userCard text-white">
+                        <div class="card-body">
+                            <h3>Favourite Series</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col">
+                    {% if userview.details.favourite_movie %}
+                    <img class="favourite-image" src="{{userview.details.favourite_movie}}" alt="">
+                    {% else %}
+                    <img class="favourite-image" src="http://image.tmdb.org/t/p/w500//tzve3LD534wsCnhOrSqgJ1mnRma.jpg" alt="">
+                    {% endif %}
+                </div>
+                <div class="col">
+                    {% if userview.details.favourite_series %}
+                    <img class="favourite-image" src="{{userview.details.favourite_series}}" alt="">
+                    {% else %}
+                    <img class="favourite-image" src="http://image.tmdb.org/t/p/w500//tzve3LD534wsCnhOrSqgJ1mnRma.jpg" alt="">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="height: 10rem;">
+
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{% static 'js/user/user.js' %}"></script>
+{% endblock %}
+
