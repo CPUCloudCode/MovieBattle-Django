@@ -84,6 +84,7 @@ class Details(models.Model):
     moderator = models.BooleanField(default=False)
     favourite_movie = models.CharField(max_length=200, default="")
     favourite_series = models.CharField(max_length=200, default="")
+    social = models.CharField(max_length=200, default="")
     def delete(self, using=None, keep_parents=False):
         self.profile_image.storage.delete(self.profile_image.name)
         self.background_image.storage.delete(self.background_image.name)

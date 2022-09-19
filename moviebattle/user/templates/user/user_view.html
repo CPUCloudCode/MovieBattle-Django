@@ -15,13 +15,40 @@
         </div>
         <div class="col">
             {% if userview.is_staff  %}
-            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-admin">Admin</span></h2>
+            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-admin me-3">Admin</span><span class="badge rounded-pill donator-span">Just chillen bro</span></h2>
             {% elif userview.details.moderator %}
             <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-danger">Moderator</span></h2>
             {% elif userview.details.premium %}
-            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill bg-warning">Premium</span></h2>
+            <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} <span class="badge rounded-pill donator-span">Donator</span></h2>
             {% else %}
             <h2 class="mt-2 shadow"><i class="bi bi-patch-check"></i> {{userview}} </h2>
+            {% endif %}
+        </div>
+        <div class="col-2">
+            {% if following %}
+            <form action="" id="followForm" style="display: none;">
+                {% csrf_token %}
+                <p id="urlFollow" style="display: none;">{% url 'follow' %}</p>
+                <p id="token" style="display: none;">{{csrf_token}}</p>
+                <p id="username" style="display: none;">{{userview}}</p>
+                <h2><span id="follow" class="badge rounded-pill bg-secondary follow-span">Follow</span></h2>
+            </form>
+            <form action="" id="unfollowForm">
+                <p id="urlUnfollow" style="display: none;">{% url 'unfollow' %}</p>
+                <h2><span id="unfollow" class="badge rounded-pill bg-primary follow-span">Following</span></h2>
+            </form>
+            {% else %}
+            <form action="" id="followForm">
+                {% csrf_token %}
+                <p id="urlFollow" style="display: none;">{% url 'follow' %}</p>
+                <p id="token" style="display: none;">{{csrf_token}}</p>
+                <p id="username" style="display: none;">{{userview}}</p>
+                <h2><span id="follow" class="badge rounded-pill bg-secondary follow-span">Follow</span></h2>
+            </form>
+            <form action="" id="unfollowForm" style="display: none;">
+                <p id="urlUnfollow" style="display: none;">{% url 'unfollow' %}</p>
+                <h2><span id="unfollow" class="badge rounded-pill bg-primary follow-span">Following</span></h2>
+            </form>
             {% endif %}
         </div>
     </div>

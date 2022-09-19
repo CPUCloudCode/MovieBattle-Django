@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.http import HttpResponse, JsonResponse
@@ -31,9 +32,16 @@ class UserView(View):
         logger.warning("Search User")
         if User.objects.filter(username=user):
             logger.warning("User exists!")
-            data['userview'] = User.objects.get(username=user)
+            userView = User.objects.get(username=user)
+            data['userview'] = userView
+            details = Details.objects.get(user=request.user)
+            if str(details.social).__contains__(str(userView.id)):
+                data['following'] = True
+            else:
+                data['following'] = False
         else:
             logger.warning("User not exists!")
+            return redirect('/user/')
         
         return render(request, 'user/user_view.html', data)
 
@@ -113,3 +121,83 @@ def updateFavourite(request):
     details.save()
         
     return JsonResponse(context)
+
+def social(request):
+    
+    logger.warning("Social-------------------")
+    logger.warning("UserID: " + str(request.user.id))
+    logger.warning("User: " + str(request.user))
+    context = {"friend": str(request.user)}
+
+    details = Details.objects.get(user=request.user)
+
+    social = details.social
+    
+    split = social.split(';')
+    sp = "1;2;3;4;5"
+    #split = sp.split(';')
+    logger.warning("Split: " + str(split))
+    users = []
+    multi = 1
+    if split:
+        for id in split:
+            if id and id != '':
+                if User.objects.filter(id=id).exists():
+                    user = User.objects.get(id=id)
+                    if Details.objects.filter(user=user).exists():
+                        details = Details.objects.get(user=user)
+                        logger.warning('Details: ' + str(details.profile_image))
+                        userJson = {"username": str(user.username), "avatar": str(details.profile_image)}
+                    else:
+                        userJson = {"username": str(user.username), "avatar": "https://wallpaperaccess.com/full/4595683.jpg"}
+                    users.append(userJson)
+                    logger.warning("Friend: " + str(userJson))
+                    multi+=1
+            else:
+                logger.warning("ID is empty")
+    context['len'] = len(users)  
+    context['users'] = users
+    logger.warning("Context: " + str(context)) 
+    return JsonResponse(context)
+
+def followUser(request):
+    logger.warning("Follow User activated--------------------")
+
+    user = User.objects.get(username=request.POST['username'])
+
+    details = Details.objects.get(user=request.user)
+
+    logger.warning("SocialBEFORE: " + str(details.social))
+
+    social = str(details.social)
+
+    if not social.__contains__(str(user.id)):
+        socialStr = str(user.id) + ";"
+        social = social + socialStr
+        details.social = social
+        details.save()
+    logger.warning("SocialAFTER: " + str(details.social))
+
+    return JsonResponse({"failed": "false"})
+
+def unfollowUser(request):
+    logger.warning("UnFollow User activated-------------------")
+
+    user = User.objects.get(username=request.POST['username'])
+
+    details = Details.objects.get(user=request.user)
+
+
+    social = details.social
+    split = social.split(';')
+    split.remove(str(user.id))
+    prime = ""
+    for s in split:
+        if s and s != '':
+            primeStr = s + ";"
+            prime = prime + primeStr
+    details.social = prime
+    details.save()
+
+    return JsonResponse({"failed": "false"})
+
