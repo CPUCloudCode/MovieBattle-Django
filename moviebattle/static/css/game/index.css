@@ -189,3 +189,37 @@ body {
 	text-decoration: underline;	
 	color: #141414;
 }
+
+/*   RESPONSIVE    */
+@media (max-width: 767.98px) {
+	.col-6 {
+		width: 100% !important;
+		margin-bottom: 2rem;
+	}
+	.card {
+		height: 100% !important;
+	}
+
+	#searchInput {
+		display: none !important;
+	}
+
+	.btn-light {
+		font-size: normal !important;
+	}
+	.btn-outline-light {
+		font-size: normal !important;
+	}
+	h4, h5 {
+		font-size: small;
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	h4, h5 {
+		font-size: small;
+	}
+	.col-md-3 {
+		width: 50% !important;
+	}
+}

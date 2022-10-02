@@ -48,3 +48,18 @@
     transform: scaleX(1);
     transform-origin: bottom left;
   }
+
+  @media (max-width: 767.98px) {
+	.col {
+        margin-bottom: 2rem !important;
+    }
+    .col-2 {
+        width: 40% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	.col-2 {
+        width: 25% !important;
+    }
+}

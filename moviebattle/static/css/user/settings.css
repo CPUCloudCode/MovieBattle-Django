@@ -123,3 +123,11 @@ li:hover {
   .footerIcons a {
     text-decoration: none;
 }
+/*   RESPONSIVE   */
+@media (max-width: 767.98px) {
+	.col-4 {
+    width: 100% !important;
+  }
+    
+}
+

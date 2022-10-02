@@ -4,7 +4,7 @@
 <link href="{% static 'css/user/user.css' %}" rel="stylesheet"></link>
 {% endblock %}
 {% block navviewcontent %}
-<div class="container text-white" style="height: 75%;">
+<div class="container text-white avatar-details" style="height: 75%;">
     <div class="row align-items-end h-100">
         <div class="col-2">
             {% if userview.details.profile_image  %}
@@ -102,7 +102,7 @@
 <!--Register--> 
 <div class="container-xl mt-5">
     <div class="row">
-        <div class="col">
+        <div class="col user-desc">
             <div class="card userCard w-100 text-white" >
                 <div class="card-body" id="user-card">
                     <textarea id="user-description" style="display: none;">{{userview.details.description}}</textarea>  

@@ -10,3 +10,9 @@ body {
     font-size: 1.8rem;
     font-family: 'Stoke', serif;
 }
+
+@media (max-width: 767.98px) {
+    .img-icon {
+        display: none;
+    }
+}

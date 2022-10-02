@@ -109,7 +109,27 @@
 }
 
 
-/** Sidebar **/
-  
+/** RESPONSIVE **/
+@media (max-width: 767.98px) {
+	.user-desc, .bi-patch-check {
+        display: none;
+    }
+    h3, h4 {
+        font-size: 1rem;
+    }
+    
+    
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+	.user-desc, .bi-patch-check {
+        display: none;
+    }
+    h3, h4 {
+        font-size: 1rem;
+    }
+
+    
+}  
   
   
