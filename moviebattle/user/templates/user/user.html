@@ -8,7 +8,7 @@
     <div class="row align-items-end h-100">
         <div class="col-2">
             {% if user.details.profile_image  %}
-            <img src="/media/{{user.details.profile_image}}" style="height: 12rem; width: 13rem;">
+            <img src="{{ MEDIA_URL }}{{user.details.profile_image}}" style="height: 12rem; width: 13rem;">
             {% else %}
             <img src="https://www.it-recht-web.de/wp-content/uploads/2018/10/filesharing-drei-fragezeichen-waldorf-frommer.jpg" style="height: 12rem; width: 13rem;">
             {% endif %}

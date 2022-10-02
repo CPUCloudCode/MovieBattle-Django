@@ -1,50 +1,67 @@
 {% extends "base.html" %}
 {% load static %}
 {% block style %}
-<link href="{% static 'css/main.css' %}" rel="stylesheet"></link>
+<link href="{% static 'css/policy.css' %}" rel="stylesheet"></link>
+<link href="{% static 'css/user/user.css' %}" rel="stylesheet"></link>
 <style>
     #container {
-        height: 85vh !important;
+        height: 100% !important;
     }
     .footerIcons a {
         text-decoration: none;
     }
-    img {
-      border-radius: 2em;
-      box-shadow: 0 5px 10px rgba(0, 0, 0, .2)
-    }
 </style>
 {% endblock %}
 {% block content %}
-    <div class="alert alert-info btn-lg alert-dismissible fade show" role="alert">
-      <strong>New Feature -</strong> Authentication System: You can now easily create an Account
-      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-    <div class="row mt-5">
-        <div class="col-4 text-white contentCol">
-            <h1 class="display-4">Which Movie will win?</h1>
-            <h3 class="mt-3">Play a game to find out!</h3>
-            <p class="mt-4">Play alone with different Movies, or play together with your friends or your Audiencem that can send in movies for you</p>
-            <a href="/game/start" class="btn btn-primary btn-lg mt-3">Start Game</a>
-            
-            <div class="w-100 mt-5">
-                <label for="joinId" class="form-label"><h4>Join a Game (Ask host for ID)</h4></label>
-                <div class="input-group">
-                    <input id="joinId" name="joinId" type="text" class="form-control" placeholder="4545f-645a-7vs4-gs53" aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-warning btn-lg" type="button" id="buttonJoin">Join now!</button>
-                </div>
-                <p class="mt-2"><strong>Remember:</strong> You can only join a game if the hosted game is in Audience Mode</p>
-            </div>
-            
-        </div>
-        <div class="col-1 col-hidden"></div>
-        <div class="col-6 col-hidden">
-            <!--<img src="{% static 'img/index.jpg' %}" alt="Index" width="700" height="700">-->
-            <img id="indexImg" src="https://www.screenbinge.com/wp-content/uploads/2022/04/Star-Trek-vs.-Star-Wars-Which-is-best-and-why.jpg" alt="Index" width="740" height="580">
-        </div>
-    </div>
-{% endblock %}
 
+    <div class="text-white mb-5 mt-5 container-sm">
+        <div class="row">
+            <div class="col-6">
+                <div class="card bg-primary">
+                    <div class="card-body">
+                        <h2>{{users}}</span> Users</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card bg-danger">
+                    <div class="card-body">
+                        <h2>{{moderator}} Mods</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="card donator-span">
+                    <div class="card-body">
+                        <h2>{{premium}} Donators</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="card bg-info">
+                    <div class="card-body">
+                        <h2>{{sets}} Sets</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="card bg-warning">
+                    <div class="card-body">
+                        <h2>{{entertainments}} Movies/Series saved in Sets</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 mt-5">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <h2>{{open_games}} Open Games</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+{% endblock %}
 {% block footer %}
     <!-- Remove the container if you want to extend the Footer to full width. -->
 
@@ -146,13 +163,13 @@
                 <a href="{% url 'credit' %}" class="text-white">Credits</a>
               </p>
               <p>
-                <a href="{% url 'site-stats' %}" class="text-white">Site Stats</a>
+                <a href="#!" class="text-white">Patchnotes</a>
               </p>
               <p>
-                <a href="#" class="text-white">Contact Form</a>
+                <a href="#!" class="text-white">Contact Form</a>
               </p>
               <p>
-                <a href="#" class="text-white">Support</a>
+                <a href="#!" class="text-white">Support</a>
               </p>
             </div>
             <!-- Grid column -->
@@ -190,10 +207,4 @@
     <!-- Footer -->
   
   <!-- End of .container -->
-{% endblock %}
-
-{% block javascript %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script src="{% static 'js/index.js' %}"></script>
 {% endblock %}
