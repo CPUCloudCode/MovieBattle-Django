@@ -58,8 +58,9 @@ class Set(models.Model):
     likes = models.IntegerField(default=0)
     creator = models.CharField(max_length=50, default="")
     description = models.TextField(default="")
-    title = models.CharField(max_length=20, default="")
+    title = models.CharField(max_length=50, default="")
     poster = models.CharField(max_length=300, default="")
+    public = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.id)
@@ -68,7 +69,7 @@ class Set(models.Model):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
 
 class Entertainment(models.Model):
-    set = models.ForeignKey(Set, on_delete=models.CASCADE)
+    set = models.ForeignKey(Set, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200) 
     href = models.CharField(max_length=200, default="")
 

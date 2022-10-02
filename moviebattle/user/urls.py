@@ -12,4 +12,11 @@ urlpatterns = [
     path('get/social/', login_required(views.social), name="social"),
     path('follow/', login_required(views.followUser), name="follow"),
     path('unfollow/', login_required(views.unfollowUser), name="unfollow"),
+    path('createset/', login_required(views.set_create), name='createset'),
+    path('postset/', login_required(views.postSet), name='postset'),
+    path('get/sets/', login_required(views.sets), name="sets"),
+    path('set/edit/<setId>/', login_required(views.SetEditView.as_view()), name="seteditview"),
+    path('editset/', login_required(views.editSet), name='editset'),
+    path('shortedit/', login_required(views.shorteditSet), name="shortedit"),
+    path('delete/', login_required(views.delete), name="delete"),
 ]

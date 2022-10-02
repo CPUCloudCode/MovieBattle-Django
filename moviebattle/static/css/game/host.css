@@ -10,6 +10,16 @@
     height: 20rem;
 }
 
+.movie-img {
+    border-radius: 3rem;
+    height: 15rem;
+    width: 12rem;
+}
+
+.movie-img:hover {
+    scale: 1.2
+}
+
 #host a {
     text-decoration: none;
     color: white;

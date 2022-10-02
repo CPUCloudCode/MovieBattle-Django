@@ -65,6 +65,7 @@
             {% csrf_token %}
             <p id="token" style="display: none;">{{ csrf_token }}</p>
             <p id="urlsocial" style="display: none;">{% url 'social' %}</p>
+            <p id="urlsets" style="display: none;">{% url 'social' %}</p>
             <a class="nav-link" id="linkSocial"
               >Social</a
             >
@@ -77,6 +78,86 @@
     <!-- Container wrapper -->
   </nav>
 <!--Register--> 
+<div class="d-flex justify-content-center">
+    <div class="alert alert-success as w-50 mt-4" style="display: none;" role="alert">
+        <h5><strong>Success!</strong>
+        Your set was successfully updated!
+        </h5>
+    </div>
+    <div class="alert alert-danger w-75 mt-4" style="display: none;" role="alert">
+        <h5><strong>Failure!</strong>
+        Something went wrong! Please try again later or contact the support
+        </h5>
+    </div>
+    <div class="alert alert-success ad w-75 mt-4" style="display: none;" role="alert">
+        <h5><strong>Delete!</strong>
+        You successfully deleted the Set!
+        </h5>
+    </div>
+</div>
+<div class="modal fade" id="setEditModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Set</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p class="text-muted"><span class="badge bg-info">Info</span> Edit your details of this set directly in this menu or navigate to the edit page to add/remove movies via <span class="badge bg-warning">Set Creator</span></p>
+            <form id="editSetForm" method="post" action="{% url 'shortedit' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="modalTitle" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="modalTitle" name="title" required>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea class="form-control" placeholder="Descripe this set" id="modalDescription" style="height: 100px" name="description" required></textarea>
+                    <label for="modalDescription">Description</label>
+                </div>
+                <div class="mb-3">
+                    <label for="modalBanner" class="form-label">Banner</label>
+                    <input type="text" class="form-control" id="modalBanner" name="poster" required>
+                  </div>
+                <div class="mb-3 form-check">
+                  <input type="checkbox" class="form-check-input" id="modalCheck" aria-describedby="statusHelp">
+                  <label class="form-check-label" for="modalCheck" id="modalCheckLabel">Public</label>
+                  <div id="statusHelp" class="form-text">Publish your Set so other users can play with it!</div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary mt-3">Speichern</button>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#" id="goToEdit" type="button" class="btn btn-warning">Open Set Creator</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" url="{% url 'delete' %}" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Delete Set</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>Sind Sie sicher, dass sie das Set 
+                <span class="badge bg-primary" id="deleteTitle">Harry Potter</span>
+                mit der ID: 
+                <span class="badge bg-info" id="deleteId">f145-545-345-2</span>
+                löschen wollen?
+            </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <a href="#" id="delete" type="button" class="btn btn-danger">Delete Set</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
 <div id="profile" class="container-xl mt-5">
     <div class="row">
         <div class="col">
@@ -118,7 +199,7 @@
                     {% elif user.details.moderator %}
                     <div class="card userCustomCard bg-danger text-white"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Moderator</h4></div></div>
                     {% elif user.details.premium %}
-                    <div class="card userCustomCard bg-warning text-dark"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Premium</h4></div></div>
+                    <div class="card userCustomCard donator-span text-white"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Donator</h4></div></div>
                     {% else %}
                     <div class="card userCustomCard userCard text-white"><div class="card-body"> <h3><i class="bi bi-trophy"></i> Current Rank</h3><h4 class="mt-2"><i class="bi bi-patch-check"></i> Default</h4></div></div>
                     {% endif %}
@@ -213,7 +294,7 @@
             <h1 class="text-white mb-4">Sets</h1>
         </div>
         <div class="col-2">
-            <button class="btn btn-lg btn-primary">Create Set</button>
+            <a href="{% url 'createset' %}" class="btn btn-lg btn-primary">Create Set</a>
         </div>
     </div>
     <div id="setsCards" class="row">

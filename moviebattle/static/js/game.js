@@ -40,30 +40,32 @@
 
     $( document ).ready(function() {
         $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=d9575db1bee61ed336421f02ae0aea37&query=" + $('#movie1Title').text() + "&callback=?", function(json) {
+                
+            if(!$("#movie1Img").attr("src")) {
                 if (json != "Nothing found." && json.total_results>0){                 
-                        console.log(json);
-                        //alert("IMG: " + $("#movie1Img").attr("src"))
-                        if(!$("#movie1Img").attr("src")) {
-                            $("#movie1Img").attr("src","http://image.tmdb.org/t/p/w500/" + json.results[0].poster_path);
-                        }
+                        
+                        $("#movie1Img").attr("src","http://image.tmdb.org/t/p/w500/" + json.results[0].poster_path);
+                        
                         //$('#poster').html('<p>Your search found: <strong>' + json.results[0].title + '</strong></p><img src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
                 } else {
                     $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=d9575db1bee61ed336421f02ae0aea37&query=undefined&callback=?", function(json) {
                         $("#movie1Img").attr("src","http://image.tmdb.org/t/p/w500/" + json.results[0].poster_path);
                     });
                 }
-            });
+            }
+        });
         $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=d9575db1bee61ed336421f02ae0aea37&query=" + $('#movie2Title').text() + "&callback=?", function(json) {
-            if (json != "Nothing found." && json.total_results>0){                 
-                    console.log(json);
-                    if(!$("#movie2Img").attr("src")) {
+            if(!$("#movie2Img").attr("src")) {
+                if (json != "Nothing found." && json.total_results>0){                 
+                        console.log(json);
+                        
                         $("#movie2Img").attr("src","http://image.tmdb.org/t/p/w500/" + json.results[0].poster_path);
-                    }
-                    //$('#poster').html('<p>Your search found: <strong>' + json.results[0].title + '</strong></p><img src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
-            } else {
-                $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=d9575db1bee61ed336421f02ae0aea37&query=undefined&callback=?", function(json) {
-                    $("#movie2Img").attr("src","http://image.tmdb.org/t/p/w500/" + json.results[0].poster_path);
-                });
+                        //$('#poster').html('<p>Your search found: <strong>' + json.results[0].title + '</strong></p><img src=\"http://image.tmdb.org/t/p/w500/' + json.results[0].poster_path + '\" class=\"img-responsive\" >');
+                } else {
+                    $.getJSON("https://api.themoviedb.org/3/search/movie?api_key=d9575db1bee61ed336421f02ae0aea37&query=undefined&callback=?", function(json) {
+                        $("#movie2Img").attr("src","http://image.tmdb.org/t/p/w500/" + json.results[0].poster_path);
+                    });
+                }
             }
         });
         let mode = $('#voteMode').text()

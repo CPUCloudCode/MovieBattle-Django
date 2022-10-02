@@ -8,7 +8,7 @@ $('#formFileAvatar').change(function(e){
     || image.includes('.JPEG') || image.includes('.JPG') || image.includes('.PNG') || image.includes('.GIF')) {
         if(image.includes('.gif')) {
             var rank = $('#rank')
-            if('default'=='default') {
+            if(rank=='default') {
                 myAlertPermissionFailure()
                 $("html, body").scrollTop(0);
                 window.allowAvatar = false

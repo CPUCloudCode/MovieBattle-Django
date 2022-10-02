@@ -19,5 +19,6 @@ urlpatterns = [
     path('checkVote', views.canVote, name="checkVote"),
     path('host/<setId>/', views.HostIndex.as_view(), name="hostIndex"),
     path('postHost', views.postHostGame, name='postHost'),
-    path('marketplace', views.marketplaceView, name='marketplace')
+    path('marketplace', views.marketplaceView, name='marketplace'),
+    path('ownsets', views.ownsetsView, name='ownsets')
 ]

@@ -11,7 +11,7 @@ from django.template import loader
 from django.views.generic import View
 from django.utils import timezone
 import random
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required                                                                                                                                                                                                                  
 
 from .models import Game, Movie, Set
 
@@ -766,23 +766,14 @@ def vote(request):
 
     ip = ip_address(get_client_ip(request))
     ipRaw = get_client_ip(request)
-    logger.warning("*******************************")
-    logger.warning("IP: " + str(ip))
-    logger.warning("IP-Type " + str(type(ip)))
-    logger.warning("IPraw-Type " + str(type(ipRaw)))
-    logger.warning("Voters: " + str(game.voter_set.all()))
 
-    logger.warning("Title 1: " + title_1 + "/" + game.c1)
-    logger.warning("Title 2: " + title_2 + "/" + game.c2)
     if title_1 != game.c1 or title_2 != game.c2:
         context = {"failed": "true"}
-        logger.warning("FAILED BECAUSE Not right SESSION")
         return JsonResponse(context)
 
     if game.voter_set.filter(ip_address=ipRaw).exists():
         if game.voter_set.get(ip_address=ipRaw).voted:
             context = {"failed": "true"}
-            logger.warning("FAILED BECAUSE ALREADY VOTED LOL")
             return JsonResponse(context)
     else:
         logger.warning("IP Adress not existing")
@@ -1338,18 +1329,18 @@ class HostIndex(View):
         movies = set.entertainment_set.all()
 
         logger.warning("Movielist: " + str(movies) + " - " + str(len(movies)))
-
-        context = {
-            "set": set,
-            "id": str(set.id),
-            "entries": len(movies)
-        }
-        return render(request, 'game/game_host.html', context)
+        if len(movies) >= 8:
+            context = {
+                "set": set,
+                "id": str(set.id),
+                "entries": len(movies),
+                "movies": movies
+            }
+            return render(request, 'game/game_host.html', context)
+        else:
+            return redirect("/user")       
 
 def postHostGame(request):
-    
-    logger.warning("ID: " + request.POST.get('id'))
-    logger.warning("Mode: " + request.POST.get('mode'))
 
     setId = request.POST.get('id')
     mode = request.POST.get('mode')
@@ -1403,7 +1394,7 @@ def marketplaceView(request):
      # request should be ajax and method should be GET.
     if request.is_ajax and request.method == "GET":
         # get the nick name from the client side.
-        sets = Set.objects.all().values()
+        sets = Set.objects.filter(public=True).values()
         ren = []
         for set in sets:
             logger.warning("---------------------------------------")
@@ -1412,6 +1403,24 @@ def marketplaceView(request):
             object = {"id": str(set['id']), "title": str(set['title']), "poster": str(set['poster']), "description": str(set['description'])}
             logger.warning("Object: " + str(object))
             ren.append(object)
+        logger.warning("Ren: " + str(ren))
+        return JsonResponse({"test": ren}, status = 200)
+
+    return JsonResponse({}, status = 400)
+
+def ownsetsView(request):
+     # request should be ajax and method should be GET.
+    if request.is_ajax and request.method == "GET":
+        # get the nick name from the client side.
+        user = request.user
+        sets = Set.objects.filter(creator=user).values()
+        ren = []
+        for set in sets:
+            setview = Set.objects.get(id=set['id'])
+            if len(setview.entertainment_set.all()) >= 8:
+                object = {"id": str(set['id']), "title": str(set['title']), "poster": str(set['poster']), "description": str(set['description'])}
+                logger.warning("Object: " + str(object))
+                ren.append(object)
         logger.warning("Ren: " + str(ren))
         return JsonResponse({"test": ren}, status = 200)
 
